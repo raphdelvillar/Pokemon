@@ -1,6 +1,6 @@
 import { Row, Col, Statistic } from "antd";
 
-export function PokemonStatistics({ pokemonDetails }) {
+export default function PokemonStatistics({ pokemonDetails }) {
   return (
     <Row gutter={100}>
       <Col span={12}>

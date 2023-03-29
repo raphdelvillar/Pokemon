@@ -1,10 +1,10 @@
 import { fetchPokemons, fetchOnePokemon } from "./api";
 import { useEffect, useState } from "react";
 import { Typography, Col, Row, Button } from "antd";
-import PokemonDetails from "./pokemon-details";
-import { PokemonStatistics } from "./pokemon-statistics";
 
-const { Title } = Typography;
+import PokemonImage from "./pokemon-image";
+import PokemonDetails from "./pokemon-details";
+import PokemonStatistics from "./pokemon-statistics";
 
 const FRONT = "front_default";
 
@@ -13,7 +13,7 @@ export default function Pokemon() {
   const [maxRandom, setMaxRandom] = useState(30);
   const [pokemonDetails, setPokemonDetails] = useState({});
   const [pokemonSprite, setPokemonSprite] = useState("");
-  const [officialArtWork, setOfficialArtWork] = useState("");
+  const [pokemonOfficialArtWork, setPokemonOfficialArtWork] = useState("");
 
   useEffect(() => {
     async function retrievePokemonDetails() {
@@ -27,27 +27,16 @@ export default function Pokemon() {
 
       setPokemonDetails(pokemon)
       setPokemonSprite(pokemon?.sprites[FRONT]);
-      setOfficialArtWork(pokemon?.sprites?.other["official-artwork"][FRONT]);
+      setPokemonOfficialArtWork(pokemon?.sprites?.other["official-artwork"][FRONT]);
     }
 
     retrievePokemonDetails();
   }, [offset])
 
-  const capitalize = (text) => {
-    if (text == null) return '';
-    return `${text?.charAt(0).toUpperCase()}${text?.slice(1)}`;
-  }
-
   return (
     <div>
       <Row>
-        <Col span={24}>
-          <img src={officialArtWork} className="Pokemon-official-art-work" alt="pokemon-official-art-work" />
-        </Col>
-        <Col span={24}>
-          <Title level={2}>{capitalize(pokemonDetails?.name)}</Title>
-          <img src={pokemonSprite} className="Pokemon-sprite" alt="pokemon-sprite" />
-        </Col>
+        <PokemonImage pokemonOfficialArtWork={pokemonOfficialArtWork} pokemonSprite={pokemonSprite} pokemonDetails={pokemonDetails} />
         <br/><br/>
         <PokemonDetails pokemonDetails={pokemonDetails}/>
       </Row>

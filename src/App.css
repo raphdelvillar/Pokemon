@@ -2,13 +2,17 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.Pokemon-official-art-work {
+  height: 20vh;
+  pointer-events: none;
+}
+
+.Pokemon-sprite {
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .Pokemon-sprite {
     animation: App-logo-float infinite 3s ease-in-out;
   }
 }
